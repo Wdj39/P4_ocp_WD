@@ -11,6 +11,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter&family=Spectral:ital,wght@0,400;1,300;1,400;1,800&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter&family=Spectral:wght@400;300;400;800&display=swap" rel="stylesheet">
 	<meta charset="UTF-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
 	<script src="./assets/bootstrap/bootstrap.bundle.js" defer></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous" defer></script>
 	<script src="./assets/maugallery.js" defer></script>
@@ -63,8 +64,39 @@
 
 <section id="about">
 	<div class="picture left">
-		<img src="./assets/images/nina_cp.zip" loading="lazy">
+		<!-- Ce conteneur contiendra l'image extraite du ZIP -->
+		<div id="image-container"></div>
 	</div>
+	<script>
+		// Fonction pour charger le fichier ZIP et extraire l'image
+		function loadZipAndDisplayImage() {
+		  fetch('./assets/images/nina_cp.zip')  // Charger le fichier ZIP
+			.then(response => response.arrayBuffer())
+			.then(data => {
+			  JSZip.loadAsync(data).then(zip => {
+				// Chercher une image à l'intérieur du ZIP
+				zip.forEach(function (relativePath, zipEntry) {
+				  if (zipEntry.name.endsWith(".webp")) {  // Vérifier que c'est un fichier .webp
+					zipEntry.async("blob").then(function (blob) {
+					  const url = URL.createObjectURL(blob);  // Créer une URL Blob
+					  const imgElement = document.createElement('img');  // Créer un élément <img>
+					  imgElement.src = url;
+					  imgElement.alt = 'Image WebP';
+					  imgElement.loading = 'lazy';  // Ajout de l'attribut loading="lazy"
+					  document.getElementById('image-container').appendChild(imgElement);  // Ajouter l'image au conteneur
+					});
+				  }
+				});
+			  });
+			})
+			.catch(error => {
+			  console.error("Erreur lors du chargement du fichier ZIP :", error);
+			});
+		}
+	  
+		// Appeler la fonction pour charger et afficher l'image
+		loadZipAndDisplayImage();
+	</script>
 	<div id="about-me">
 		<h3 class="about-me__title">A propos de moi</h3>
 		<h6 class="about-me__introduction">Devenir photographe était pour moi une évidence. Comme si j’y étais prédestiné. Saisir un moment, une émotion, une situation, un endroit, une lumière et les rendre immortels, voilà ce qui me fait vibrer.</h6>
