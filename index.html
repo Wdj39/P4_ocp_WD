@@ -66,49 +66,6 @@
 	<div class="picture left">
 		<img src="./assets/images/nina.webp">
 	</div>
-
-	<script>
-		// Fonction pour charger et afficher les images extraites des ZIP
-		function displayImagesFromZip(zipUrl, containerId, callback) {
-			fetch(zipUrl)
-				.then(response => response.arrayBuffer())
-				.then(data => {
-					JSZip.loadAsync(data).then(zip => {
-						zip.forEach(function (relativePath, zipEntry) {
-							if (zipEntry.name.endsWith(".webp")) {  // Vérifier que c'est un fichier .webp
-								zipEntry.async("blob").then(function (blob) {
-									const url = URL.createObjectURL(blob);  // Créer une URL Blob
-									const imgElement = document.createElement('img');  // Créer un élément <img>
-									imgElement.src = url;
-									imgElement.alt = relativePath;
-									imgElement.loading = 'lazy';
-									imgElement.classList.add('picture left');
-									imgElement.classList.add('gallery-item');  // Ajout de la classe gallery-item
-									imgElement.setAttribute('data-gallery-tag', 'Nouveau'); // Attribuer un tag par défaut
-									document.getElementById(containerId).appendChild(imgElement);  // Ajouter l'image au conteneur
-								});
-							}
-						});
-						if (callback) callback(); // Appeler le callback après avoir ajouté les images
-					});
-				})
-				.catch(error => {
-					console.error("Erreur lors du chargement du fichier ZIP :", error);
-				});
-		}
-	
-		// Appel des fonctions pour afficher les images des ZIP
-		displayImagesFromZip('./assets/images/camera_cp.zip', 'gallery-container', function() {
-			$('.gallery').mauGallery();  // Réinitialiser mauGallery après l'ajout des images
-		});
-		displayImagesFromZip('./assets/images/slider_cp.zip', 'gallery-container', function() {
-			$('.gallery').mauGallery();  // Réinitialiser mauGallery après l'ajout des images
-		});
-		displayImagesFromZip('./assets/images/gallery_cp.zip', 'gallery-container', function() {
-			$('.gallery').mauGallery();  // Réinitialiser mauGallery après l'ajout des images
-		});
-	</script>
-	
 	<div id="about-me">
 		<h3 class="about-me__title">A propos de moi</h3>
 		<h6 class="about-me__introduction">Devenir photographe était pour moi une évidence. Comme si j’y étais prédestiné. Saisir un moment, une émotion, une situation, un endroit, une lumière et les rendre immortels, voilà ce qui me fait vibrer.</h6>
