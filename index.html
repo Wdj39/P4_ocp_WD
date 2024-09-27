@@ -64,9 +64,9 @@
 
 <section id="about">
 	<div class="picture left">
-		<!-- Ce conteneur contiendra l'image extraite du ZIP -->
-		<div id="image-container"></div>
+		<img src="./assets/images/nina.webp">
 	</div>
+
 	<script>
 		// Fonction pour charger et afficher les images extraites des ZIP
 		function displayImagesFromZip(zipUrl, containerId, callback) {
@@ -82,6 +82,7 @@
 									imgElement.src = url;
 									imgElement.alt = relativePath;
 									imgElement.loading = 'lazy';
+									imgElement.classList.add('picture left');
 									imgElement.classList.add('gallery-item');  // Ajout de la classe gallery-item
 									imgElement.setAttribute('data-gallery-tag', 'Nouveau'); // Attribuer un tag par défaut
 									document.getElementById(containerId).appendChild(imgElement);  // Ajouter l'image au conteneur
