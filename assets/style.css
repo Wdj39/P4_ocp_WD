@@ -69,6 +69,7 @@ header {
 
 .picture img {
 	width: 100%;
+	height: auto
 
 }
 #about-me {
@@ -109,6 +110,29 @@ header {
 .nav-pills .nav-link {
 	color: #000
 }
+/* Style pour les tags non actifs */
+.nav-pills .tag-item {
+    color: #000; /* Noir pour un bon contraste de base */
+    background-color: #f0f0f0; /* Fond léger pour meilleure lisibilité */
+    border-radius: 4px;
+    padding: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Style pour le tag actif */
+.nav-pills .nav-link.active-tag {
+    color: #fff; /* Texte blanc pour contraste optimal */
+    background-color: #BEB45A; /* Couleur de fond déjà définie, mais peut être renforcée */
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Ajout d'une ombre pour renforcer le contraste */
+}
+
+/* Ajout d'un hover effect pour les tags non actifs */
+.nav-pills .tag-item:hover {
+    background-color: #ddd; /* Changement de fond au survol pour plus de visibilité */
+    color: #333; /* Amélioration du contraste lors du survol */
+}
+
 .item-column {
 	position: relative;
 	margin-bottom: 0 !important;
