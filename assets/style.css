@@ -110,27 +110,27 @@ header {
 .nav-pills .nav-link {
 	color: #000
 }
-/* Style pour les tags non actifs */
+/* Style des tags non actifs avec des couleurs conformes aux critères de contraste */
 .nav-pills .tag-item {
-    color: #000; /* Noir pour un bon contraste de base */
-    background-color: #f0f0f0; /* Fond léger pour meilleure lisibilité */
+    color: #333; /* Augmentation du contraste en passant à une couleur plus foncée */
+    background-color: #e0e0e0; /* Arrière-plan légèrement plus foncé pour mieux contraster avec le texte */
     border-radius: 4px;
     padding: 10px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Style pour le tag actif */
+/* Style du tag actif avec un meilleur contraste */
 .nav-pills .nav-link.active-tag {
-    color: #fff; /* Texte blanc pour contraste optimal */
-    background-color: #BEB45A; /* Couleur de fond déjà définie, mais peut être renforcée */
+    color: #ffffff; /* Blanc pur pour contraste maximum */
+    background-color: #6b8e23; /* Vert olive foncé avec un bon contraste sur fond blanc */
     font-weight: bold;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Ajout d'une ombre pour renforcer le contraste */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Ombrage pour encore plus de visibilité */
 }
 
-/* Ajout d'un hover effect pour les tags non actifs */
+/* Hover effect pour les tags non actifs */
 .nav-pills .tag-item:hover {
-    background-color: #ddd; /* Changement de fond au survol pour plus de visibilité */
-    color: #333; /* Amélioration du contraste lors du survol */
+    background-color: #cccccc; /* Couleur plus foncée pour améliorer le contraste au survol */
+    color: #000000; /* Texte noir pour un contraste élevé */
 }
 
 .item-column {
