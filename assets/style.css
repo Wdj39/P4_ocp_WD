@@ -110,21 +110,21 @@ header {
 .nav-pills .nav-link {
 	color: #000
 }
-/* Style des tags non actifs avec des couleurs conformes aux critères de contraste */
+/* Amélioration du contraste pour les tags non actifs */
 .nav-pills .tag-item {
-    color: #333; /* Augmentation du contraste en passant à une couleur plus foncée */
-    background-color: #e0e0e0; /* Arrière-plan légèrement plus foncé pour mieux contraster avec le texte */
+    color: #1a1a1a; /* Texte très foncé */
+    background-color: #f5f5f5; /* Fond très clair */
     border-radius: 4px;
     padding: 10px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Style du tag actif avec un meilleur contraste */
+/* Amélioration du contraste pour les tags actifs */
 .nav-pills .nav-link.active-tag {
-    color: #ffffff; /* Blanc pur pour contraste maximum */
-    background-color: #6b8e23; /* Vert olive foncé avec un bon contraste sur fond blanc */
+    color: #ffffff; /* Blanc pur pour le texte */
+    background-color: #5a5a5a; /* Gris très foncé pour le fond actif */
     font-weight: bold;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Ombrage pour encore plus de visibilité */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Ombrage pour plus de visibilité */
 }
 
 /* Hover effect pour les tags non actifs */
