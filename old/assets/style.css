@@ -6,7 +6,7 @@ body {
 	font-family: 'Inter';
 	font-style: normal;
 }
-header {
+.top-header {
 	background-color: white;
 	position: sticky;
 	top:0;
@@ -49,17 +49,6 @@ header {
 	padding-block: 100px;
 	position: relative;
 }
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap; /* Assure que le texte est invisible mais toujours lisible par les lecteurs d'écran */
-    border: 0;
-}
 
 .picture.left::before {
 	content: ' ';
@@ -80,7 +69,6 @@ header {
 
 .picture img {
 	width: 100%;
-	height: auto
 
 }
 #about-me {
@@ -103,9 +91,8 @@ header {
 }
 
 #gallery {
-	min-height: 100vh;
+	/*	min-height: 100vh; */
 }
-
 .title{
 	text-align: center;
 	padding-block: 2em;
@@ -121,29 +108,6 @@ header {
 .nav-pills .nav-link {
 	color: #000
 }
-/* Amélioration du contraste pour les tags non actifs */
-.nav-pills .tag-item {
-    color: #1a1a1a; /* Texte très foncé pour garantir un contraste élevé */
-    background-color: #f5f5f5; /* Fond clair pour améliorer le contraste */
-    border-radius: 4px;
-    padding: 10px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Amélioration du contraste pour les tags actifs */
-.nav-pills .nav-link.active-tag {
-    color: #ffffff; /* Blanc pur pour le texte */
-    background-color: #5a5a5a; /* Gris très foncé pour le fond actif */
-    font-weight: bold;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Ombre pour améliorer la visibilité */
-}
-
-/* Hover effect pour les tags non actifs */
-.nav-pills .tag-item:hover {
-    background-color: #cccccc; /* Couleur plus foncée pour améliorer le contraste au survol */
-    color: #000000; /* Texte noir pour un contraste élevé */
-}
-
 .item-column {
 	position: relative;
 	margin-bottom: 0 !important;
