@@ -124,7 +124,7 @@ header {
 /* Amélioration du contraste pour les tags non actifs */
 .nav-pills .tag-item {
     color: #1a1a1a; /* Texte très foncé pour garantir un contraste élevé */
-    background-color: #f5f5f5; /* Fond clair pour améliorer le contraste */
+    background-color: #c3a13a; /* Fond clair pour améliorer le contraste */
     border-radius: 4px;
     padding: 10px;
     transition: background-color 0.3s ease, color 0.3s ease;
