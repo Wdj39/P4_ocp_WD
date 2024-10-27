@@ -40,7 +40,6 @@
       $(this).fadeIn(500);
     });
   };
-
   $.fn.mauGallery.defaults = {
     columns: 3,
     lightBox: true,
@@ -49,7 +48,6 @@
     tagsPosition: "bottom",
     navigation: true
   };
-
   $.fn.mauGallery.listeners = function(options) {
     $(".gallery-item").on("click", function() {
       if (options.lightBox && $(this).prop("tagName") === "IMG") {
@@ -59,18 +57,14 @@
       }
     });
 
-    // Modification : Événements de clic pour la navigation modale
-    // Active les fonctions prevImage et nextImage lors du clic sur les boutons de navigation
-    $(".gallery").on("click", ".mg-prev", () => {
-      console.log("Bouton précédent cliqué"); // Vérification de l'événement
-      $.fn.mauGallery.methods.prevImage(options.lightboxId);
-    });
-    $(".gallery").on("click", ".mg-next", () => {
-      console.log("Bouton suivant cliqué"); // Vérification de l'événement
-      $.fn.mauGallery.methods.nextImage(options.lightboxId);
-    });
+    $(".gallery").on("click", ".nav-link", $.fn.mauGallery.methods.filterByTag);
+    $(".gallery").on("click", ".mg-prev", () =>
+      $.fn.mauGallery.methods.prevImage(options.lightboxId)
+    );
+    $(".gallery").on("click", ".mg-next", () =>
+      $.fn.mauGallery.methods.nextImage(options.lightboxId)
+    );
   };
-
   $.fn.mauGallery.methods = {
     createRowWrapper(element) {
       if (
@@ -127,38 +121,86 @@
         .attr("src", element.attr("src"));
       $(`#${lightboxId}`).modal("toggle");
     },
-    prevImage(lightboxId) {
-      // Logique mise à jour pour afficher l'image précédente dans la modale
+    prevImage() {
+      // Modification : Logique mise à jour pour trouver et afficher l'image précédente dans la modale.
       let activeImage = null;
       $("img.gallery-item").each(function() {
         if ($(this).attr("src") === $(".lightboxImage").attr("src")) {
           activeImage = $(this);
         }
       });
-      let imagesCollection = $(".gallery-item"); // Rassemble toutes les images
+      let activeTag = $(".tags-bar span.active-tag").data("images-toggle");
+      let imagesCollection = [];
+      if (activeTag === "all") {
+        $(".item-column").each(function() {
+          if ($(this).children("img").length) {
+            imagesCollection.push($(this).children("img"));
+          }
+        });
+      } else {
+        $(".item-column").each(function() {
+          if (
+            $(this)
+              .children("img")
+              .data("gallery-tag") === activeTag
+          ) {
+            imagesCollection.push($(this).children("img"));
+          }
+        });
+      }
+      let index = 0,
+        next = null;
 
-      // Trouver l'index de l'image actuelle et naviguer vers l'image précédente
-      let index = imagesCollection.index(activeImage);
-      let prevIndex = (index - 1 + imagesCollection.length) % imagesCollection.length;
-      $(".lightboxImage").attr("src", imagesCollection.eq(prevIndex).attr("src"));
+      $(imagesCollection).each(function(i) {
+        if ($(activeImage).attr("src") === $(this).attr("src")) {
+          index = i ;
+        }
+      });
+      next =
+        imagesCollection[index] ||
+        imagesCollection[imagesCollection.length - 1];
+      $(".lightboxImage").attr("src", $(next).attr("src"));
     },
-    nextImage(lightboxId) {
-      // Logique mise à jour pour afficher l'image suivante dans la modale
+    nextImage() {
       let activeImage = null;
       $("img.gallery-item").each(function() {
         if ($(this).attr("src") === $(".lightboxImage").attr("src")) {
           activeImage = $(this);
         }
       });
-      let imagesCollection = $(".gallery-item"); // Rassemble toutes les images
+      let activeTag = $(".tags-bar span.active-tag").data("images-toggle");
+      let imagesCollection = [];
+      if (activeTag === "all") {
+        $(".item-column").each(function() {
+          if ($(this).children("img").length) {
+            imagesCollection.push($(this).children("img"));
+          }
+        });
+      } else {
+        $(".item-column").each(function() {
+          if (
+            $(this)
+              .children("img")
+              .data("gallery-tag") === activeTag
+          ) {
+            imagesCollection.push($(this).children("img"));
+          }
+        });
+      }
+      let index = 0,
+        next = null;
 
-      // Trouver l'index de l'image actuelle et naviguer vers l'image suivante
-      let index = imagesCollection.index(activeImage);
-      let nextIndex = (index + 1) % imagesCollection.length;
-      $(".lightboxImage").attr("src", imagesCollection.eq(nextIndex).attr("src"));
+      $(imagesCollection).each(function(i) {
+        if ($(activeImage).attr("src") === $(this).attr("src")) {
+          index = i;
+        }
+      });
+      next = imagesCollection[index] || imagesCollection[0];
+      $(".lightboxImage").attr("src", $(next).attr("src"));
     },
     createLightBox(gallery, lightboxId, navigation) {
-      // Modification : Création d'une modale avec boutons de navigation conditionnels
+       // Modification : Création d'une modale avec boutons de navigation conditionnels.
+      // La modale est affichée lors de l'appel de "openLightBox".
       gallery.append(`<div class="modal fade" id="${
         lightboxId ? lightboxId : "galleryLightbox"
       }" tabindex="-1" role="dialog" aria-hidden="true">
@@ -170,7 +212,7 @@
                                 ? '<div class="mg-prev" style="cursor:pointer;position:absolute;top:50%;left:-15px;background:white;"><</div>'
                                 : '<span style="display:none;" />'
                             }
-                            <img class="lightboxImage img-fluid" alt="Contenu de l\'image affichée dans la modale au clique"/>
+                            <img class="lightboxImage img-fluid" alt="Contenu de l'image affichée dans la modale au clique"/>
                             ${
                               navigation
                                 ? '<div class="mg-next" style="cursor:pointer;position:absolute;top:50%;right:-15px;background:white;}">></div>'
