@@ -114,15 +114,12 @@
       }
     },
     openLightBox(element, lightboxId) {
-      // Modification : Utilisation de "modal('toggle')" pour afficher la modale.
-      // La fonction associe la source de l'image cliquée à l'image dans la modale, puis l'affiche.
       $(`#${lightboxId}`)
         .find(".lightboxImage")
         .attr("src", element.attr("src"));
       $(`#${lightboxId}`).modal("toggle");
     },
     prevImage() {
-      // Modification : Logique mise à jour pour trouver et afficher l'image précédente dans la modale.
       let activeImage = null;
       $("img.gallery-item").each(function() {
         if ($(this).attr("src") === $(".lightboxImage").attr("src")) {
@@ -153,7 +150,7 @@
 
       $(imagesCollection).each(function(i) {
         if ($(activeImage).attr("src") === $(this).attr("src")) {
-          index = i ;
+          index = i;
         }
       });
       next =
@@ -199,8 +196,6 @@
       $(".lightboxImage").attr("src", $(next).attr("src"));
     },
     createLightBox(gallery, lightboxId, navigation) {
-       // Modification : Création d'une modale avec boutons de navigation conditionnels.
-      // La modale est affichée lors de l'appel de "openLightBox".
       gallery.append(`<div class="modal fade" id="${
         lightboxId ? lightboxId : "galleryLightbox"
       }" tabindex="-1" role="dialog" aria-hidden="true">
@@ -212,7 +207,7 @@
                                 ? '<div class="mg-prev" style="cursor:pointer;position:absolute;top:50%;left:-15px;background:white;"><</div>'
                                 : '<span style="display:none;" />'
                             }
-                            <img class="lightboxImage img-fluid" alt="Contenu de l'image affichée dans la modale au clique"/>
+                            <img class="lightboxImage img-fluid" alt="Contenu de l\'image affichée dans la modale au clique"/>
                             ${
                               navigation
                                 ? '<div class="mg-next" style="cursor:pointer;position:absolute;top:50%;right:-15px;background:white;}">></div>'
